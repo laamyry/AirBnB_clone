@@ -1,10 +1,8 @@
-/* Styles for the body section */
 body {
     margin: 0;
     padding: 0;
 }
 
-/* Styles for the main section */
 main {
     position: relative;
     min-height: 100vh;
