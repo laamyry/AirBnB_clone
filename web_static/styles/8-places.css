@@ -35,7 +35,7 @@ article h2 {
     height: 60px;
     border-radius: 50%;
     position: absolute;
-    margin-left: 315px;
+    margin-left: 300px;
     margin-top: -55px;
     display: flex;
     justify-content: center;
@@ -56,7 +56,10 @@ article h2 {
     text-align: initial;
     margin-top: -25px;
 }
+.description p{
+margin-top: 22px;
 
+}
 .places .information {
     display: flex;
     justify-content: space-evenly;
@@ -71,4 +74,10 @@ article h2 {
 .information .number_rooms,
 .information .number_bathrooms {
     width: 100px;
+}
+.information .max_guest p,
+.information .number_rooms p,
+.information .number_bathrooms p {
+
+    margin-top: 0px;
 }

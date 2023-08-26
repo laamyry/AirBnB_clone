@@ -168,3 +168,13 @@ article .price_by_night {
         width: 70%;
     }
 }
+
+.information .max_guest p,
+.information .number_rooms p,
+.information .number_bathrooms p {
+
+    margin-top: 0px;
+}
+.description p{
+    margin-top: 22px;
+}
