@@ -1,34 +1,58 @@
 #!/usr/bin/python3
-'''Module for the FileStorage class.'''
+'''file storage'''
 import json
-from os.path import exists
+import os
 from models.base_model import BaseModel as base
+from models.user import User
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+from models.place import Place
+from models.state import State
 
 
 class FileStorage:
+
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        id = obj.to_dict()["id"]
+        className = obj.to_dict()["__class__"]
+        keyName = className+"."+id
+        FileStorage.__objects[keyName] = obj
 
     def save(self):
-        objects_dict = {}
-        for key, obj in self.__objects.items():
-            objects_dict[key] = obj.to_dict()
-        with open(self.__file_path, 'w', encoding="utf-8") as file:
-            json.dump(objects_dict, file)
+        filepath = FileStorage.__file_path
+        data = dict(FileStorage.__objects)
+        for key, value in data.items():
+            data[key] = value.to_dict()
+        with open(filepath, 'w') as f:
+            json.dump(data, f)
 
     def reload(self):
-        if exists(self.__file_path):
-            with open(self.__file_path, 'r', encoding="utf-8") as file:
-                objects_dict = json.load(file)
-                for key, obj_dict in objects_dict.items():
-                    class_name, obj_id = key.split('.')
-                    obj_dict['__class__'] = class_name
-                    obj = eval(class_name)(**obj_dict)
-                    self.__objects[key] = obj
+        filepath = FileStorage.__file_path
+        data = FileStorage.__objects
+        if os.path.exists(filepath):
+            try:
+                with open(filepath) as f:
+                    for key, value in json.load(f).items():
+                        if "BaseModel" in key:
+                            data[key] = base(**value)
+                        if "User" in key:
+                            data[key] = User(**value)
+                        if "Place" in key:
+                            data[key] = Place(**value)
+                        if "State" in key:
+                            data[key] = State(**value)
+                        if "City" in key:
+                            data[key] = City(**value)
+                        if "Amenity" in key:
+                            data[key] = Amenity(**value)
+                        if "Review" in key:
+                            data[key] = Review(**value)
+            except Exception:
+                pass

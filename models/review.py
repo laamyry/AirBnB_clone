@@ -1,3 +1,9 @@
 #!/usr/bin/python3
-'''Be pycodestyle compliant!'''
-print("Be pycodestyle compliant!")
+'''review file'''
+from models.base_model import BaseModel as base
+
+
+class Review(base):
+    place_id = ""
+    user_id = ""
+    text = ""

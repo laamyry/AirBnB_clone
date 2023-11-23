@@ -1,3 +1,10 @@
 #!/usr/bin/python3
-'''Be pycodestyle compliant!'''
-print("Be pycodestyle compliant!")
+'''user file'''
+from models.base_model import BaseModel as base
+
+
+class User(base):
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""

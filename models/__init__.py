@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''Module to create'''
+'''init file'''
 from models.engine.file_storage import FileStorage
 
 storage = FileStorage()
